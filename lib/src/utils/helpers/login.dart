@@ -29,11 +29,14 @@ load(context!);
   try{
     if (resp["data"]["success"]) {
       final user = resp["data"]["user"];
-
+      pref.islogin = true;
       pref.my_id =  user["id"].toString();
       pref.photo_profile = user["photo_profile_url"];
       pref.name= user["nombre"];
-      pref.islogin = true;
+   
+
+      pref.token = resp['data']['data']['access_token'];
+
       navigatorToHome();
     }else{
        floadMessage(mensaje: resp["data"]["error"]);
