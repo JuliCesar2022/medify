@@ -136,48 +136,6 @@ class _RegisterPage1State extends State<RegisterPage1> {
                       onFieldSubmitted: (v) {
                         return v;
                       }),
-
-                  //     Row(
-                  //       children: [
-                  //         Padding(
-                  //       padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 0),
-                  //       child: Select(
-
-                  //         icon: Icons.add_ic_call_rounded,
-                  //         onChangue: () {
-                  //         if (this.mounted) setState(() {});
-                  //         },
-
-                  //         description: "",
-                  //         label: "Pais",
-                  //         curretValue: registerProvider.country_code,
-                  //         listValues: [
-                  //           SelectItem(key: "+57",value: "57"),
-                  //           SelectItem(key: "+58",value: "58"),
-                  //         ],
-                  //         width: 100,
-                  //       ),
-                  //     ),
-
-                  //     CustomFormField(
-                  //       width: size!.width/2,
-                  //       focusNode: phoneFocus,
-                  //       validator: (val) {
-                  //         if (!val!.isNumericOnly) return 'Número de telefono no valido.';
-                  //         return null;
-                  //       },
-                  //       hintext: "**********",
-                  //       icon: Icon(Icons.call),
-                  //       lavelText: "Número",
-                  //       textController: registerProvider.phone_number,
-                  //       textInputType: TextInputType.number,
-                  //       onFieldSubmitted: (v){
-                  //         registerProvider.nextPage();
-                  //       },
-
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

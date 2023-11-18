@@ -341,7 +341,7 @@ load(BuildContext context, {bool colorSuave = false}) {
                 radius: double.infinity,
                 child: (CircleAvatar(
                   radius: 30,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Color.fromRGBO(64, 62, 65, 1),
                   child: Align(
                       alignment: Alignment.center,
                       child: Center(

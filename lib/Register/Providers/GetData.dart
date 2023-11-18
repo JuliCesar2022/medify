@@ -2,6 +2,7 @@ import 'package:medify/Register/Models/Departamento.dart';
 import 'package:medify/Register/Models/Municipios.dart';
 import 'package:medify/Register/Models/Professions.dart';
 import 'package:medify/Register/Models/TiposDocumentos.dart';
+import 'package:medify/config/config_global.dart';
 import 'package:medify/src/Provider/PeticionesHttpProvider.dart';
 import 'package:medify/src/utils/UI/widget/global_widgets.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +13,12 @@ class GetData {
 
   final String _departament_host = "api/v1/departments";
   final String _municipio_host = "api/v1/cities";
-  final String _documentos_host = "api/v1/types_documents";
   final String _professions_host = "api/v1/professions";
+  final String _medicamento_host = "api/v1/medicamento";
 
   Future<TiposDocumentos?> getTypeDocuments(BuildContext context) async {
 
-    Map<String,dynamic> data = await http.getMethod(context: context, table: _documentos_host );
+    Map<String,dynamic> data = await http.getMethod(context: context, table: _medicamento_host );
 
     print(data['resp']);
     if(data["message"] == 'true'){
@@ -49,6 +50,24 @@ class GetData {
     }else{
       alerta(context, code:false,contenido: "Error del servidor");
       return null;
+    }
+
+
+    // return [];
+  }
+  Future<Map<String, dynamic>> getMedicamento(BuildContext context) async {
+    Map<String,dynamic> data = await http.getMethod(context: context, table: _medicamento_host ,token:pref.token );
+
+    print(data['data']);
+    
+    if(data["message"] == 'true'){
+
+
+      return data;
+
+    }else{
+      alerta(context, code:false,contenido: "Error del servidor");
+      return {};
     }
 
 

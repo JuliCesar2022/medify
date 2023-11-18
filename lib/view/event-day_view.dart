@@ -1,9 +1,13 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:medify/view/model/model_event.dart';
 import 'package:table_calendar/table_calendar.dart';
-
+import 'package:calendar_view/calendar_view.dart';
 class EventDayView extends StatefulWidget {
   final DateTime fechaSeleccionada;
+  
   
 
   EventDayView({required this.fechaSeleccionada});
@@ -13,9 +17,26 @@ class EventDayView extends StatefulWidget {
 }
 
 class _EventDayViewState extends State<EventDayView> {
+
+
+
   
   @override
   Widget build(BuildContext context) {
+
+    var eventController = EventController();
+    // Create an event instance
+final myEvent = CalendarEventData(
+   date: DateTime(2023, 11, 15),
+    event: "Event 1",
+    title: 'mi evento'
+  // Add other event details
+);
+
+// Add the event to the controller
+eventController.add(myEvent as CalendarEventData<Object?>);
+
+
   print(widget.fechaSeleccionada);
     return Scaffold(
       backgroundColor: Colors.black, // Fondo oscuro
@@ -43,39 +64,43 @@ class _EventDayViewState extends State<EventDayView> {
             ),
             headerVisible: false,
           ),
+
+          Flexible(
+            child: CalendarControllerProvider(
+              controller: EventController(),
+              child: DayView(
+                dayTitleBuilder: (date) => Text(date.toString()),
+                backgroundColor: Colors.black,
+                controller: eventController,
+                eventTileBuilder: (date, events, boundry, start, end) {
+                    // Return your widget to display as event tile.
+                    print(events);
+                    print(date);
+                    return Text('hplaaaa',style: TextStyle(color: Colors.white),);
+                },
+                fullDayEventBuilder: (events, date) {
+                    // Return your widget to display full day event view.
+                    return Container();
+                },
+                showVerticalLine: true, // To display live time line in day view.
+                showLiveTimeLineInAllDays: true, // To display live time line in all pages in day view.
+                minDay: DateTime(1990),
+                maxDay: DateTime(2050),
+                initialDay: widget.fechaSeleccionada,
+                heightPerMinute: 1, // height occupied by 1 minute time span.
+                eventArranger: SideEventArranger(), // To define how simultaneous events will be arranged.
+                onEventTap: (events, date) => print(events),
+                onDateLongPress: (date) => print(date),
+                      ),
+            ),
+          ),
           
-          Expanded(
-            child: ListView.builder(
-              
-              itemCount: 24,
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  height: 50, // Altura fija para cada elemento
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.grey[600]!, // Línea gris
-                         // Ancho de línea
-                      ),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        index < 10 ? '0$index:00' : '$index:00',
-                        style: TextStyle(color: Colors.white, fontSize: 16), // Estilo del texto
-                      ),
+
                       // Aquí puedes agregar otros widgets, como un ícono o un texto para mostrar eventos
                     ],
                   ),
                 );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+              }
+            
   }
-}
+

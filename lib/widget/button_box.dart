@@ -29,11 +29,11 @@ class _CustomButtonState extends State<CustomButton> {
           height: 45,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),
-          color: Color.fromARGB(255, 18, 121, 255),
+          color: const Color.fromARGB(255, 18, 121, 255),
           onPressed: widget.onPressed,
           child: Text(
             widget.textButton,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w900, fontSize: 20),
           ),
         ),

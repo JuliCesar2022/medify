@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferenciasUsuario {
@@ -45,7 +47,32 @@ class PreferenciasUsuario {
 
 
 
+String get por_subir => _prefs.getString('por_subir')??"";
 
+set por_subir(String value) {
+_prefs.setString('por_subir', value);
+}
+
+
+  List<Map<String, dynamic>> get medicamentos {
+
+    List<String> medicamentosString = _prefs.getStringList('medicamentos') ?? [];
+
+
+    return medicamentosString.map((medicamentoString) {
+      var decoded = json.decode(medicamentoString);
+      // Asegurarse de que el tipo de dato sea Map<String, dynamic>
+      return decoded is Map<String, dynamic> ? decoded : <String, dynamic>{};
+    }).toList();
+
+  }
+
+  // Guardar la lista de mapas
+  set medicamentos(List<Map<String, dynamic>> value) {
+    List<String> medicamentosString = value.map((medicamentoMap) => json.encode(medicamentoMap)).toList();
+    print(medicamentosString);
+    _prefs.setStringList('medicamentos', medicamentosString);
+  }
 
   String get my_id => _prefs.getString('my_id')??"";
 

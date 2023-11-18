@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medify/Register/Providers/GetData.dart';
 import 'package:medify/src/Provider/PeticionesHttpProvider.dart';
 
 import 'package:medify/src/utils/UI/widget/global_widgets.dart';
@@ -19,6 +20,7 @@ class Login {
     Map<String, String> credenciales = {
       'username': _username,
       'password': _password,
+      'firebase_token' : pref.firebase_token,
     };
 
 
@@ -36,6 +38,24 @@ load(context!);
    
 
       pref.token = resp['data']['data']['access_token'];
+       
+
+        GetData obtenerData = GetData();
+
+        
+
+         // ignore: use_build_context_synchronously
+         final  respuesta = await obtenerData.getMedicamento(context);
+             
+
+
+         List<dynamic> listaDinamica = respuesta['data']; // Tu List<dynamic> existente
+List<Map<String, dynamic>> listaDeMapas = List<Map<String, dynamic>>.from(listaDinamica);
+
+
+     if(resp['data']['success']) floadMessage(titulo: 'Agregado correctamente',mensaje: 'exitoso');
+         pref.medicamentos = listaDeMapas;
+
 
       navigatorToHome();
     }else{

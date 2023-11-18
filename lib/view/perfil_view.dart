@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medify/src/Provider/PeticionesHttpProvider.dart';
 import 'package:medify/src/utils/UI/widget/ButtomCustom/buton_custom.dart';
@@ -19,6 +20,9 @@ class Perfil extends StatefulWidget {
 }
 
 class _PerfilState extends State<Perfil> {
+
+ 
+
   String _estado = 'Bien';
   String _frecuencia = 'Normal';
   String _latidos = 'Lento';
@@ -84,11 +88,29 @@ class _PerfilState extends State<Perfil> {
            
       
       ],),
-      floatingActionButton: BuutomCustom( onpresed: ()  {
+      floatingActionButton: BuutomCustom( onpresed: ()  async{
+
+         load(context);
              pref.islogin = false;
-          
-            PeticionesHttpProvider().postMethod(table: "api/v1/logout",token: pref.token);
+             
+         load(context);
+
+            final   Map<String, dynamic>  resp = await peticion.postMethod(table: "api/v1/logout",token: pref.token);
+
+  try{
+    if (resp["data"]["success"]) {
+
             Navigator.pushReplacementNamed(context, LoginView.routeName);
+    }
+
+    }catch(e){
+
+      floadMessage(titulo: 'No se pudo cerrar sesion');
+      Get.back();
+    }
+            
+
+
             },color: Colors.blue,
             title: Text('Cerrar sesion',
             style: TextStyle(fontSize: 20)),) ,

@@ -36,7 +36,7 @@ class NotificationController {
     //  await audioPlayer.play(UrlSource(file.path), volume: .5);
 
     
-    floadMessage( mensaje: message.notification!.title,duration: Duration(milliseconds: (2000) + (message.notification!.body!.length * 50))  );
+    floadMessage( mensaje: message.notification!.body,duration: Duration(milliseconds: (2000) + (message.notification!.body!.length * 50)), titulo:  message.notification!.title );
   
   }
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class InputTextForm extends StatefulWidget {
   final String _placeholder;
   final bool _encryptation;
-  final _textController;
+  final TextEditingController _textController;
 
   const InputTextForm(
       {super.key,
@@ -32,7 +32,7 @@ class _InputTextFormState extends State<InputTextForm> {
         enabledBorder: outlineInputBorder,
         focusedBorder: outlineInputBorder,
         filled: true,
-        fillColor: Color.fromARGB(255, 58, 59, 60));
+        fillColor: const Color.fromARGB(255, 58, 59, 60));
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -45,7 +45,6 @@ class _InputTextFormState extends State<InputTextForm> {
         controller: widget._textController,
         decoration: inputDecoration,
         onFieldSubmitted: (value) {
-          print('Submit value $value');
           // focusNode.requestFocus();
         },
       ),

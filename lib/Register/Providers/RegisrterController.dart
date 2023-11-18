@@ -50,7 +50,7 @@ class RegisterController {
     };
 
     var request = http.MultipartRequest(
-        'POST', Uri.parse(ConfigGlobal.serverUrlBackEndApp + '/api/v1/user'));
+        'POST', Uri.parse(await ConfigGlobal.serverUrlBackEndApp + '/api/v1/user'));
 
     request.fields.addAll({
       'nombre': name.text.trim(),

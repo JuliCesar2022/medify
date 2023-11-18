@@ -23,7 +23,7 @@ class PeticionesHttpProvider {
     }
 
     try {
-      String url = ConfigGlobal.serverUrlBackEndApp + '/$table';
+      String url = await ConfigGlobal.serverUrlBackEndApp + '/$table';
       print(url);
       dynamic resp = await http
           .post(Uri.parse(url), body: body, headers: head)
@@ -92,7 +92,7 @@ class PeticionesHttpProvider {
     }
 
     try {
-      String url = pref.host_name.toString() + '/$table';
+      String url = ConfigGlobal.serverUrlBackEndApp + '/$table';
       print(url);
 
       dynamic resp = await http.get(

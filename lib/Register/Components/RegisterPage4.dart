@@ -7,6 +7,9 @@ import 'package:medify/src/utils/UI/widget/Select/models/select_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
 
 class RegisterPage4 extends StatefulWidget {
   const RegisterPage4({super.key});
@@ -126,9 +129,8 @@ class _RegisterPage4State extends State<RegisterPage4> {
                           child: const Text(
                             "Aceptar terminos y condiciones",
                           ),
-                          onPressed: () {
-                            launchWhatsAppString(
-                                "https://doriaire.com/terminos-y-condiciones-de-uso");
+                          onPressed: () async{
+                          _launchInBrowser('https://andr3sr0driguez.github.io/Politica_privacidad/pp.html');
                           }),
                       Checkbox(
                           value: registerProvider.terminos_y_condicicones,
@@ -150,9 +152,11 @@ class _RegisterPage4State extends State<RegisterPage4> {
     );
   }
 
-  launchWhatsAppString(String url) async {
-    if (await canLaunchUrlString(url)) {
-      await launchUrlString(url);
-    }
+
+ Future<void> _launchInBrowser(String url) async {
+  if (!await launch(url)) {
+    throw 'No se pudo lanzar $url';
   }
+}
+
 }
